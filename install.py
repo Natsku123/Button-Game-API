@@ -35,23 +35,23 @@ def main():
     try:
         with urllib.request.urlopen("https://dl.meckl.in/button-game-api/modules/__init__.py") as response:
             with open("modules/__init__.py", "w") as module_init:
-                module_init.write(response.read())
+                module_init.write(str(response.read()))
 
         with urllib.request.urlopen("https://dl.meckl.in/button-game-api/modules/database.py") as response:
             with open("modules/database.py", "w") as module_database:
-                module_database.write(response.read())
+                module_database.write(str(response.read()))
 
         with urllib.request.urlopen("https://dl.meckl.in/button-game-api/modules/utils.py") as response:
             with open("modules/utils.py", "w") as module_utils:
-                module_utils.write(response.read())
+                module_utils.write(str(response.read()))
 
         with urllib.request.urlopen("https://dl.meckl.in/button-game-api/app.py") as response:
             with open("app.py", "w") as app_file:
-                app_file.write(response.read())
+                app_file.write(str(response.read()))
 
         with urllib.request.urlopen("https://dl.meckl.in/button-game-api/wsgi.py") as response:
             with open("wsgi.py", "w") as wsgi_file:
-                wsgi_file.write(response.read())
+                wsgi_file.write(str(response.read()))
 
     except OSError:
         print("No permissions to create needed files!")

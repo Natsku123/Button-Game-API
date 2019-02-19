@@ -11,5 +11,3 @@ build:
   script:
     - cp -R * /var/www/dl.meckl.in/button-game-api
     - cp -R * /var/www/button-game.meckl.in/api
-    - chown www-data:www-data /var/www/dl.meckl.in/button-game-api -R
-    - chown www-data:www-data /var/www/button-game.meckl.in/api -R
