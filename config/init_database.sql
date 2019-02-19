@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS players (
+  id INT AUTO_INCREMENT,
+  username VARCHAR(255) NOT NULL,
+  clicks INT NOT NULL,
+  bronze INT NOT NULL,
+  silver INT NOT NULL,
+  gold INT NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE (username)
+) ENGINE=INNODB, CHARSET=utf8;
+#
+CREATE TABLE IF NOT EXISTS clickers (
+  id INT AUTO_INCREMENT,
+  clicked INT NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=INNODB, CHARSET=utf8;
+#
+INSERT INTO clickers (`clicked`) VALUES (0);
