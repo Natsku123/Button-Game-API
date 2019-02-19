@@ -124,7 +124,8 @@ def main():
     print("\nCreating tables...")
 
     with urllib.request.urlopen('https://dl.meckl.in/button-game-api/config/init_database.sql') as response:
-        sql = str(response.read())
+        text = str(response.read())
+        sql = str(text)[2:len(text)-2]
 
     sql = sql.split("#")
 
@@ -133,7 +134,7 @@ def main():
                              cursorclass=pymysql.cursors.DictCursor)
         try:
             with db.cursor() as cursor:
-                cursor.execute(command.strip("'b'"))
+                cursor.execute(command)
 
             db.commit()
             db.close()
