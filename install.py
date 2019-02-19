@@ -124,8 +124,7 @@ def main():
     print("\nCreating tables...")
 
     with urllib.request.urlopen('https://dl.meckl.in/button-game-api/config/init_database.sql') as response:
-        text = str(response.read())
-        sql = str(text)[2:len(text)-2]
+        sql = str(response.read())
 
     sql = sql.split("#")
 
