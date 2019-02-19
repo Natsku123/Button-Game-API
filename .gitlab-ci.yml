@@ -11,3 +11,4 @@ build:
   script:
     - cp -R * /var/www/dl.meckl.in/button-game-api
     - cp -R * /var/www/button-game.meckl.in/api
+    - systemctl restart button-game-api.uwsgi

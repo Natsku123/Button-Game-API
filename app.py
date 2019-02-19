@@ -10,7 +10,7 @@ app.config['SECRET'] = get_config()['secret']
 cors = CORS(app, supports_credentials=True)
 
 
-@app.route('/')
+@app.route('/api/')
 def hello_world():
     return 'Welcome to ButtonGameAPI!'
 
