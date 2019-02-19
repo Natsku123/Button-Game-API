@@ -133,7 +133,7 @@ def main():
                              cursorclass=pymysql.cursors.DictCursor)
         try:
             with db.cursor() as cursor:
-                cursor.execute(command.strip("\n"))
+                cursor.execute(command.strip("'b'"))
 
             db.commit()
             db.close()
