@@ -110,9 +110,7 @@ def add_click(username):
 
     # Create a player or update player
     if new_player:
-        new_sql = "INSERT INTO players (" \
-                  "`username`, `clicks`, `bronze`, `silver`, `gold`" \
-                  ") VALUES ('{0}', '{1}', '{2}'. '{3}', '{4}');".format(
+        new_sql = "INSERT INTO players (`username`, `clicks`, `bronze`, `silver`, `gold`) VALUES ('{0}', '{1}','{2}', '{3}', '{4}');".format(
                         player['username'],
                         player['clicks'],
                         player['bronze'],
