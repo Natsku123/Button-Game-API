@@ -92,7 +92,6 @@ def add_click(username):
     clicker = get(clicker_sql, False)
 
     # Debug
-    print(clicker)
 
     # Add this click
     clicker['clicked'] = clicker['clicked'] + 1
@@ -110,6 +109,12 @@ def add_click(username):
         status = "bronze"
     else:
         status = "default"
+
+    # Update clicker
+    clicker_update_sql = "UPDATE clickers SET `clicked`='{0}' WHERE `id`=1;".format(clicker['clicked'])
+
+    if not insert(clicker_update_sql):
+        return {'status': "error", "error": "Cannot update clicker."}
 
     # Create a player or update player
     if new_player:
