@@ -91,6 +91,9 @@ def add_click(username):
 
     clicker = get(clicker_sql, False)
 
+    # Debug
+    print(clicker)
+
     # Add this click
     clicker['clicked'] = clicker['clicked'] + 1
     player['clicks'] = player['clicks'] + 1
