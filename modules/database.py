@@ -151,6 +151,16 @@ def get_players():
     return get(sql)
 
 
+def get_player(username):
+    """
+    Get player with username.
+    :param username:
+    :return:
+    """
+    sql = "SELECT * FROM players WHERE `username`='{0}';".format(username)
+    return get(sql, False)
+
+
 def get_needed():
     """
     Calculate next goal and amount of clicks needed.

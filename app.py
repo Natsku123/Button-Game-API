@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, abort
 from flask_cors import CORS
 from modules.utils import get_config
-from modules.database import get_players, add_click, get_needed
+from modules.database import get_players, add_click, get_needed, get_player
 
 app = Flask(__name__)
 
@@ -17,6 +17,9 @@ def hello_world():
 
 @app.route('/api/v1.0/players/', methods=['GET'])
 def players():
+    username = request.args.get("username")
+    if username:
+        return jsonify(get_player(username))
     return jsonify(get_players())
 
 
