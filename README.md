@@ -16,12 +16,12 @@ NOTE: Most of these commands need to be run with `root` or `sudo`.
 
 Install needed programs:
 ```bash
-apt-get install mariadb-server uwsgi nginx
+apt-get install mariadb-server nginx
 ```
 
 Install needed libraries for python:
 ```bash
-pip3 install flask flask-cors pymysql
+pip3 install flask flask-cors pymysql uwsgi
 ```
 
 Installer can be downloaded by clicking [this link](https://dl.meckl.in/button-game-api/install.py).
