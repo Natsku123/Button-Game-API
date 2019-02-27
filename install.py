@@ -4,6 +4,7 @@ import json
 import os
 import pymysql
 import urllib.request
+import getpass
 
 
 def generate_secret():
@@ -69,7 +70,7 @@ def main():
     if host == "":
         host = "127.0.0.1"
     username = input("Database username: ")
-    password = input("Database password: ")
+    password = getpass.getpass("Database password: ")
     name = input("Database name: ")
 
     secret = generate_secret()
@@ -108,11 +109,11 @@ def main():
                  "chdir = %(base)\n" \
                  "master = true\n" \
                  "processes = 5\n" \
-                 "socket = %(base)/config/uwsgi.sock\n" \
+                 "socket = {0}/config/uwsgi.sock\n" \
                  "chown-socket = %(uid):www-data\n" \
                  "chmod-socket = 666\n" \
                  "vacuum = true\n" \
-                 "logger = file:%(base)/config/errlog".format(directory)
+                 "logger = file:{0}/config/errlog".format(directory)
 
     try:
         with open("config/uwsgi.ini", "w") as uwsgi_file:
