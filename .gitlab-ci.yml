@@ -9,6 +9,5 @@ stages:
 build:
   stage: build
   script:
-    - cp -R * /var/www/dl.meckl.in/button-game-api
-    - cp -R * /var/www/button-game.meckl.in/api
-    - sudo systemctl restart button-game-api.uwsgi
+    - cp -R * [directory]
+    - sudo systemctl restart [service name]
