@@ -7,13 +7,18 @@ import urllib.request
 
 
 def generate_secret():
+    """
+    Generate secret for Flask.
+    :return:
+    """
     chars = string.ascii_letters + string.digits
     return ''.join(random.choice(chars) for _ in range(64))
 
 
 def main():
-    print("Starting setup for ButtonGameAPI...")
+    print("Starting setup for Button-Game-API...")
 
+    # Create directories and notify if permissions needed
     try:
         config_dir = "config/"
         if not os.path.exists(config_dir):
@@ -32,31 +37,33 @@ def main():
         print("No permissions to create a directory for files!")
         return
 
+    # Download files from dl.meckl.in
     try:
         with urllib.request.urlopen("https://dl.meckl.in/button-game-api/modules/__init__.py") as response:
             with open("modules/__init__.py", "w") as module_init:
-                module_init.write(str(response.read()))
+                module_init.write(response.read().decode('utf-8'))
 
         with urllib.request.urlopen("https://dl.meckl.in/button-game-api/modules/database.py") as response:
             with open("modules/database.py", "w") as module_database:
-                module_database.write(str(response.read()))
+                module_database.write(response.read().decode('utf-8'))
 
         with urllib.request.urlopen("https://dl.meckl.in/button-game-api/modules/utils.py") as response:
             with open("modules/utils.py", "w") as module_utils:
-                module_utils.write(str(response.read()))
+                module_utils.write(response.read().decode('utf-8'))
 
         with urllib.request.urlopen("https://dl.meckl.in/button-game-api/app.py") as response:
             with open("app.py", "w") as app_file:
-                app_file.write(str(response.read()))
+                app_file.write(response.read().decode('utf-8'))
 
         with urllib.request.urlopen("https://dl.meckl.in/button-game-api/wsgi.py") as response:
             with open("wsgi.py", "w") as wsgi_file:
-                wsgi_file.write(str(response.read()))
+                wsgi_file.write(response.read().decode('utf-8'))
 
     except OSError:
         print("No permissions to create needed files!")
         return
 
+    # Database configuration
     print("\nConfigure database:")
     host = input("Database host (default: 127.0.0.1): ")
     if host == "":
@@ -67,6 +74,7 @@ def main():
 
     secret = generate_secret()
 
+    # Create config
     config = {
         "database": {
             "host": host,
@@ -93,24 +101,18 @@ def main():
     if directory.endswith("/"):
         directory = directory[:len(directory)-1]
 
-    uwsgi_conf = """
-    [uwsgi]
-    module = wsgi
-     
-    uid = www-data
-    
-    base = {0}
-    chdir = %(base)
-    
-    master = true
-    processes = 5
-    
-    socket = %(base)/config/uwsgi.sock
-    chown-socket = %(uid):www-data
-    chmod-socket = 666
-    vacuum = true
-    logger = file:%(base)/config/errlog
-    """.format(directory)
+    uwsgi_conf = "[uwsgi]\n" \
+                 "module = wsgi\n" \
+                 "uid = www-data\n" \
+                 "base = {0}\n" \
+                 "chdir = %(base)\n" \
+                 "master = true\n" \
+                 "processes = 5\n" \
+                 "socket = %(base)/config/uwsgi.sock\n" \
+                 "chown-socket = %(uid):www-data\n" \
+                 "chmod-socket = 666\n" \
+                 "vacuum = true\n" \
+                 "logger = file:%(base)/config/errlog".format(directory)
 
     try:
         with open("config/uwsgi.ini", "w") as uwsgi_file:
@@ -124,7 +126,7 @@ def main():
     print("\nCreating tables...")
 
     with urllib.request.urlopen('https://dl.meckl.in/button-game-api/config/init_database.sql') as response:
-        sql = str(response.read())
+        sql = response.read().decode('utf-8')
 
     sql = sql.split("#")
 
